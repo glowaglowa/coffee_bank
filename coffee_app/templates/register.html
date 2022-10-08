@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>ZAREJESTRUJ SIĘ</h1><br>
+    <div>
+            <form method="POST" action="">
+                {% csrf_token %}
+    {%  for field in formula %}
+        {{field.label}}
+        {{field}}
+    {% endfor %}
+    <input type="submit" name="Create_User">
+    </form>
+    </div>
+{% endblock %}

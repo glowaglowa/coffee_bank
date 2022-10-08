@@ -1,5 +1,6 @@
-from django.db.models import CharField, Model, IntegerField, ForeignKey, TextField, DateTimeField, DO_NOTHING, \
-    AutoField, ImageField
+from django.contrib.auth.models import User
+from django.db.models import CharField, Model, ForeignKey, TextField, DateTimeField, DO_NOTHING, \
+    AutoField, ImageField, OneToOneField, CASCADE
 
 
 class Roastery(Model):
@@ -43,18 +44,16 @@ class Coffee(Model):
 
 
 class Users(Model):
-    user_id = AutoField(primary_key=True)
-    username = CharField(max_length=20, unique=True)
+    user = OneToOneField(User, on_delete=CASCADE, primary_key=True, default="1")
+    username = CharField(max_length=32,)
     password = CharField(max_length=32)
 
     def __str__(self):
         return self.username
 
-    class Meta:
-        verbose_name = "Users"
-        verbose_name_plural = "Users"
-
 
 class UsersCoffees(Model):
-    user_id = ForeignKey(Users, on_delete=DO_NOTHING)
-    coffee_id = ForeignKey(Coffee, on_delete=DO_NOTHING)
+    uc_id = AutoField(primary_key=True, default="1")
+    coffee_id = OneToOneField(Coffee, on_delete=DO_NOTHING)
+    user = ForeignKey(Users, on_delete=DO_NOTHING, default="1")
+
