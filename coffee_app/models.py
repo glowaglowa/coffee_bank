@@ -56,5 +56,5 @@ class Users(Model):
 
 
 class UsersCoffees(Model):
-    user_id = AutoField(primary_key=True)
+    user_id = ForeignKey(Users, on_delete=DO_NOTHING)
     coffee_id = ForeignKey(Coffee, on_delete=DO_NOTHING)
