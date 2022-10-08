@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import ListView
 
-from coffee_app.models import Coffee
+from coffee_app.models import Roastery, Origin, Roast, Coffee, Users, UsersCoffees
 
 
-def coffee_app(request):
-    q = Coffee.objects.all()
-    return HttpResponse(q)
-
+class CoffeesView(ListView):
+    template_name = 'coffee_app.html'
+    model = Coffee

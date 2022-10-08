@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>COFFEE BANK - skarbnica wiedzy o Twojej ulubionej kawie</h1><br>
+    <div>
+        <ul>
+            {% for coffee in object_list %}
+                <li>
+                    {{ coffee.name }} ({{ coffee.roastery }}) - {{ coffee.origin }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
