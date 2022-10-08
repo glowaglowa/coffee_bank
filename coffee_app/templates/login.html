@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>ZALOGUJ SIĘ</h1><br>
+    <div>
+        <ul>
+            <form class="site-form" action="{% url 'loginPage' %}" method="post">
+        {% csrf_token %}
+        {{ formula }}
+        <input type="submit" name="Log in">
+    </form>
+        </ul>
+    </div>
+{% endblock %}
