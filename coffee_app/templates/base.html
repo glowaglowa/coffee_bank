@@ -2,6 +2,14 @@
 
 <html {% if LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}"{% endif %}>
 
+<style>
+    .hello {
+        margin-right: 15px;
+        color: peachpuff;
+    }
+</style>
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +39,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/">
+                <a class="nav-item nav-link active" href="user/">
                     Panel użytkownika
                 </a>
             </div>
@@ -48,6 +56,14 @@
                 <a class="nav-item nav-link active" href="/">
                     O nas!
                 </a>
+            </div>
+                    </div>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <span class="hello"> Hello, {{ request.user  }}       </span>
+                <span ><a href="{% url 'logoutPage' %}">
+                    Log out
+                </a></span>
             </div>
         </div>
     </div>

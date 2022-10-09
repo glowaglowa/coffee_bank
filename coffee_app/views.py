@@ -16,9 +16,9 @@ class CoffeesView(ListView):
     model = Coffee
 
 
-def coffeeRegisterPage(request):
+def coffee_register_page(request):
     if request.user.is_authenticated:
-        return redirect('loginPage')
+        return redirect('coffee_app')
     else:
         formula = CreateUser()
         if request.method == 'POST':
@@ -31,30 +31,38 @@ def coffeeRegisterPage(request):
                 )
                 messages.success(request, "Account was successfully created for " + username)
 
-                return redirect('login')
+                return redirect('loginPage')
 
         cond = {'formula': formula}
         return render(request, 'register.html', cond)
 
 
-def coffeeLoginPage(request):
-    formula = AuthenticationForm()
-    if request.method == 'POST':
-        formula = AuthenticationForm(request.POST)
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+def coffee_login_page(request):
+    if request.user.is_authenticated:
+        return redirect('coffee_app')
+    else:
+        formula = AuthenticationForm()
+        if request.method == 'POST':
+            formula = AuthenticationForm(request.POST)
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('coffee_app')
-        else:
-            messages.info(request, "Username or password is incorrect")
+            if user is not None:
+                login(request, user)
+                return redirect('coffee_app')
+            else:
+                messages.info(request, "Username or password is incorrect")
 
-    cond = {"formula": formula}
-    return render(request, 'login.html', cond)
+        cond = {"formula": formula}
+        return render(request, 'login.html', cond)
 
 
-def coffeLogOut(request):
+def coffe_log_out(request):
     logout(request)
     return redirect('loginPage')
+
+
+def coffee_user_page(request):
+    cond = {}
+    return render(request, "user.html", cond)
